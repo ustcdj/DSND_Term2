@@ -13,4 +13,4 @@ def run_tests(shirt_one, shirt_two, total_cost, total_discount):
 
     assert total_cost == 20, 'the total_cost of both shirts should be 20'
     
-    assert round(total_discount) == 18, 'total_discount should be 18.0'
+    assert total_discount == 18, 'total_discount should be 18.0'
