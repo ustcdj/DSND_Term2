@@ -16,7 +16,7 @@ def cleandata(dataset, keepcolumns = ['Country Name', '1990', '2015'], value_var
     Returns:
         None
 
-    """    
+    """
     df = pd.read_csv(dataset, skiprows=4)
 
     # Keep only the columns of interest (years and country name)
@@ -44,15 +44,15 @@ def return_figures():
 
     """
 
-  # first chart plots arable land from 1990 to 2015 in top 10 economies 
+  # first chart plots arable land from 1990 to 2015 in top 10 economies
   # as a line chart
-    
+
     graph_one = []
     df = cleandata('data/API_AG.LND.ARBL.HA.PC_DS2_en_csv_v2.csv')
     df.columns = ['country','year','hectaresarablelandperperson']
     df.sort_values('hectaresarablelandperperson', ascending=False, inplace=True)
     countrylist = df.country.unique().tolist()
-    
+
     for country in countrylist:
       x_val = df[df['country'] == country].year.tolist()
       y_val =  df[df['country'] == country].hectaresarablelandperperson.tolist()
@@ -71,12 +71,12 @@ def return_figures():
                 yaxis = dict(title = 'Hectares'),
                 )
 
-# second chart plots ararble land for 2015 as a bar chart    
+# second chart plots ararble land for 2015 as a bar chart
     graph_two = []
     df = cleandata('data/API_AG.LND.ARBL.HA.PC_DS2_en_csv_v2.csv')
     df.columns = ['country','year','hectaresarablelandperperson']
     df.sort_values('hectaresarablelandperperson', ascending=False, inplace=True)
-    df = df[df['year'] == 2015] 
+    df = df[df['year'] == 2015]
 
     graph_two.append(
       go.Bar(
@@ -113,20 +113,20 @@ def return_figures():
                   autotick=False, tick0=1990, dtick=25),
                 yaxis = dict(title = 'Percent'),
                 )
-    
+
 # fourth chart shows rural population vs arable land
     graph_four = []
-    
+
     valuevariables = [str(x) for x in range(1995, 2016)]
     keepcolumns = [str(x) for x in range(1995, 2016)]
     keepcolumns.insert(0, 'Country Name')
 
     df_one = cleandata('data/API_SP.RUR.TOTL_DS2_en_csv_v2_9914824.csv', keepcolumns, valuevariables)
     df_two = cleandata('data/API_AG.LND.FRST.K2_DS2_en_csv_v2_9910393.csv', keepcolumns, valuevariables)
-    
+
     df_one.columns = ['country', 'year', 'variable']
     df_two.columns = ['country', 'year', 'variable']
-    
+
     df = df_one.merge(df_two, on=['country', 'year'])
 
     for country in countrylist:
@@ -146,7 +146,7 @@ def return_figures():
           mode = 'markers',
           text = text,
           name = country,
-          textposition = 'top'
+          textposition = 'top left'
           )
       )
 
@@ -154,12 +154,12 @@ def return_figures():
                 xaxis = dict(title = 'Rural Population'),
                 yaxis = dict(title = 'Forest Area (square km)'),
                 )
-    
+
     graph_five = []
     df_five = cleandata('data/API_SP.RUR.TOTL_DS2_en_csv_v2_9914824.csv', ['Country Name', '2015'], ['2015'])
 
     df_five.columns = ['country','year','ruralpopulation']
-    df_five.sort_values('ruralpopulation', ascending=False, inplace=True) 
+    df_five.sort_values('ruralpopulation', ascending=False, inplace=True)
 
     graph_five.append(
       go.Bar(
@@ -171,7 +171,7 @@ def return_figures():
     layout_five = dict(title = 'Rural Population in 2015',
                 xaxis = dict(title = 'Country',),
                 yaxis = dict(title = 'Rural Population'))
-    
+
     # append all charts to the figures list
     figures = []
     figures.append(dict(data=graph_one, layout=layout_one))

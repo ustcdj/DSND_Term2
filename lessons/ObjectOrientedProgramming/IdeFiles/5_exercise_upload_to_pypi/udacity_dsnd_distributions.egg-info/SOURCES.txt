@@ -1,0 +1,10 @@
+setup.py
+udacity_dsnd_distributions/Binomialdistribution.py
+udacity_dsnd_distributions/Gaussiandistribution.py
+udacity_dsnd_distributions/Generaldistribution.py
+udacity_dsnd_distributions/__init__.py
+udacity_dsnd_distributions.egg-info/PKG-INFO
+udacity_dsnd_distributions.egg-info/SOURCES.txt
+udacity_dsnd_distributions.egg-info/dependency_links.txt
+udacity_dsnd_distributions.egg-info/not-zip-safe
+udacity_dsnd_distributions.egg-info/top_level.txt
